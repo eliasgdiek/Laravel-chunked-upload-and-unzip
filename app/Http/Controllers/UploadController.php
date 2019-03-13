@@ -99,25 +99,9 @@ class UploadController extends Controller
         // Build the file path
         $filePath = "upload/";
         $finalPath = storage_path("app/".$filePath);
-        $fullPath = $finalPath.'/'.$fileName;
-        $extract_dir = storage_path("app/".$filePath).'/'.$time;
         
         // move the file name
         $file->move($finalPath, $fileName);
-        Zipper::make($fullPath)->extractTo($extract_dir);
-
-        $client = S3Client::factory(array(
-            'credentials' => [
-                'key'    => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            ],
-            'region'  => env('AWS_DEFAULT_REGION'),
-            'version' => env('AMAZON_VERSION'),
-        ));
-        $path = $extract_dir;
-        $dest = 's3://'.env('AWS_BUCKET').'/'.$time;
-        $manager = new \Aws\S3\Transfer($client, $path, $dest);
-        $manager->transfer();
 
         return response()->json([
             'path' => $filePath,
