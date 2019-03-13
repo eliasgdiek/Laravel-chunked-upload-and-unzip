@@ -23,7 +23,7 @@ Laravel is accessible, yet powerful, providing tools needed for large, robust ap
 
 ## Description of this app
 
-This Laravel application is to upload a zip file to local storage and unzip it on local storage, upload an unziped file to Amazon S3 bucket.
+This Laravel application is to upload a zip file to local storage and unzip it on local storage, upload an unziped file to Amazon S3 bucket by using Laravel chunked upload package and resumable.js .
 
 ## Usages
 
